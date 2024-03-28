@@ -1,11 +1,11 @@
-############################################################################################################
+####################################################################################
 1. Create a new Rails app
 Ans) 
 step step 2 => rails new myapp
 1 => cd path/to/your/directory
 step 3 => cd myapp
 
-############################################################################################################
+####################################################################################
 2. Create a new model with a name and data of your choosing with some basic validations
 Ans)
 step 1 => rails generate model ModelName attribute1:string attribute2:integer
@@ -17,7 +17,7 @@ class ModelName < ApplicationRecord
   validates :attribute2, numericality: { only_integer: true }
 end
 
-############################################################################################################
+####################################################################################
 3. Create a controller for this model that contains endpoints for create and update
 i) No authentication is required
 ii) Include some basic verification for submitted parameters
@@ -60,7 +60,7 @@ Rails.application.routes.draw do
   resources :model_name, only: [:create, :update]
 end
 
-#######################################################################################################
+##########################################################################################
 
 4. Available third-party API endpoints should be configurable (backend support only, no need for GUI)
 Ans) step 1 => 
@@ -130,9 +130,7 @@ Ans)
 
    HTTPS: Ensure that webhook requests are transmitted over HTTPS to encrypt the data in transit and prevent man-in-the-middle attacks.
 
-#######################################################################################################################################################################
-
-
+######################################################################################################################################
 
 # README
 
