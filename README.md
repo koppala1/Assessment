@@ -1,11 +1,11 @@
-####################################################################################
+#############################################################################################################
 1. Create a new Rails app
 Ans) 
 step step 2 => rails new myapp
 1 => cd path/to/your/directory
 step 3 => cd myapp
 
-####################################################################################
+##############################################################################################################
 2. Create a new model with a name and data of your choosing with some basic validations
 Ans)
 step 1 => rails generate model ModelName attribute1:string attribute2:integer
@@ -17,7 +17,7 @@ class ModelName < ApplicationRecord
   validates :attribute2, numericality: { only_integer: true }
 end
 
-####################################################################################
+############################################################################################################
 3. Create a controller for this model that contains endpoints for create and update
 i) No authentication is required
 ii) Include some basic verification for submitted parameters
@@ -60,7 +60,7 @@ Rails.application.routes.draw do
   resources :model_name, only: [:create, :update]
 end
 
-##########################################################################################
+#################################################################################################################
 
 4. Available third-party API endpoints should be configurable (backend support only, no need for GUI)
 Ans) step 1 => 
@@ -82,7 +82,7 @@ third_party_apis = YAML.load_file(Rails.root.join('config', 'third_party_apis.ym
 # Access endpoint based on environment
 endpoint_url = third_party_apis[Rails.env]['third_party_api_endpoint_url']
 
-###########################################################################################################
+###################################################################################################################
 5. When new data is stored or updated, all configured endpoints should be notified of the changes
 Ans)
 
@@ -112,7 +112,7 @@ def notify_webhooks
   WebhookService.notify_endpoints(self)
 end
 
-############################################################################################################
+##############################################################################################################################
 
 6. Third parties should be provided with means to verify the authenticity of the webhook request
 Ans)
