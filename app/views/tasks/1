@@ -1,0 +1,17 @@
+<main>
+  <div class="container mt-30">
+    <div class="row">
+      <!-- Links on the left side -->
+      <div class="col-md-30">
+ <p><b><%= SrTranslate.sr_t("Select The Role You Want To Login")%></b></p>
+        <div class="text-left">
+          <a href="/page1">Page 1</a><br>
+          <a href="/page2">Page 2</a><br>
+          <a href="/page3">Page 3</a>
+          <!-- Add more links as needed -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+

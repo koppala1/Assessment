@@ -1,0 +1,52 @@
+<style>
+  .glow-hover {
+    display: inline-block;
+    position: relative;
+    font-size: 2em;
+    color: #3498db; /* Initial color */
+    transition: color 0.3s, text-shadow 0.3s;
+  }
+
+  .glow-hover:hover {
+    color: #2ecc71; /* Hover color */
+    text-shadow: 0 0 5px #2ecc71, 0 0 10px #2ecc71, 0 0 15px #2ecc71; /* Glow effect */
+  }
+</style>
+
+<div class="container mt-5 text-center">
+  <h1 class="mb-4 glow-hover">Add Task</h1>
+</div>
+
+<%= form_for :task, url: create_task_path, class: 'mx-auto' do |f| %>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <%= f.label :title, "Task", class: 'form-label font-weight-bold' %>
+        <%= f.text_field :title, class: 'form-control form-control-sm', placeholder: 'New Task' %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-6 mx-auto">
+        <%= f.label :status, "Status", class: 'form-label font-weight-bold' %>
+        <%= f.collection_select :status, [['Pending','pending'],['Ongoing','ongoing'],['Completed','completed']],:second,:first, { prompt: 'Select', class: 'form-select form-select-sm' } %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-6 mx-auto">
+        <%= f.label :date, "Date", class: 'form-label font-weight-bold' %>
+        <%= f.date_field :date, value: Date.today, class: 'form-control form-control-sm', prompt: { day: 'Select day', month: 'Select month', year: 'Select year' } %>
+      </div>
+    </div>
+
+    <div class="row mt-3 text-center">
+      <div class="col-md-6 mx-auto">
+        <%= f.submit "Create Task", class: 'btn btn-primary btn-lg btn-glow' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'Task Lists', controller: 'tasks', action: 'task_list', class: 'mt-3 btn btn-secondary btn-block' %>
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body, table {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+    }
+
+    h1:hover {
+      color: #007bff;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 4px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      text-align: center;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    a {
+      text-decoration: none;
+      color: #3498db;
+    }
+    .pending-text {
+        color: red;
+    }
+
+    .completed-text {
+        color: green;
+    }
+
+    .ongoing-text {
+        color: blue;
+    }
+
+    a:hover {
+      color: #2980b9;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!--script><%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %></script-->
+</head>
+<body>
+
+  <h1>Task List</h1>
+  <div>
+      <%= link_to 'New Task' , controller: 'tasks', action: 'new' %>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Sl No</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% count = @tasks.current_page * @tasks.per_page - @tasks.per_page %>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= count=count+1 %></td>
+          <td><%= task.title %></td>
+          <td class="<%= task.status.downcase %>-text"><%= task.status %></td>
+          <!--td><%#= task.status %></td-->
+          <td><%= task.date %></td>
+          <td>
+            <%= link_to 'Edit', edit_task_path(task.id) %>
+            <% if task.id.present? %>
+              <%= form_with(model: task, url: delete_task_path(task.id), method: :delete ) do |form| %>
+              <%= form.button 'Delete', id: 'delete_button', onclick: 'confirmDelete(event)' %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @tasks, renderer: WillPaginate::ActionView::LinkRenderer, class: 'pagination' %>
+  <%#= link_to 'Back' , controller: 'tasks', action: 'new' %>
+
+</body>
+  <script>
+  function confirmDelete(event) {
+    // Prompt the user for confirmation
+    var confirmed = confirm('Are you sure you want to delete the value?');
+
+    // Check the user's response
+    if (!confirmed) {
+      // If the user clicks "Cancel" or "No", prevent the form from submitting
+      event.preventDefault();
+      // alert('Deletion canceled'); // Uncomment this line if you want to show an alert
+    }
+  }
+</script>
+
+</html>
+
