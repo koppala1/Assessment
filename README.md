@@ -116,18 +116,20 @@ end
 
 6. Third parties should be provided with means to verify the authenticity of the webhook request
 Ans)
-  Shared Secret or API Key: Provide each third party with a unique shared secret or API key. 
-  This key should be included in the webhook request headers or payload.
 
-  HMAC (Hash-based Message Authentication Code): Use the shared secret/API key to generate an HMAC of the request payload. 
-  Include this HMAC in the request headers or payload.
+Shared Secret Key:
+Generate a secret key that will be shared between your application and the third parties. This key should be securely exchanged and kept confidential.
 
-   Verification on Third-Party Side: Third parties can then use the shared secret/API key to regenerate the HMAC on their side and 
-   compare it with the HMAC received in the request. If they match, it indicates that the request originated from the expected source.
+Include Signature in Webhook Payload:
+When sending the webhook request, include a signature calculated using the secret key and the payload data. This signature can be added as a custom header or within the payload itself.
 
-   Timestamps: Include a timestamp in the webhook request to prevent replay attacks. Third parties can verify that the timestamp is within an 
-    acceptable range to ensure the request's freshness.
+Signature Calculation:
+Use a secure hashing algorithm like HMAC (Hash-based Message Authentication Code) to calculate the signature. Combine the payload data with the secret key and hash the result. This ensures that any change in the payload or secret key will result in a different signature.
 
-   HTTPS: Ensure that webhook requests are transmitted over HTTPS to encrypt the data in transit and prevent man-in-the-middle attacks.
+Verify Signature on Third Party's End:
+On the third party's end, they should have access to the same secret key. When they receive a webhook request, they can recalculate the signature using the received payload data and the secret key. If the calculated signature matches the one received in the request, it verifies the authenticity of the webhook
+
+Handling Unauthorized Requests:
+If the signatures do not match or if the signature is missing, the third party should reject the request as unauthorized. Additionally, you can implement measures like rate limiting and IP whitelisting to enhance security
 
 #########################################################################################################################################
