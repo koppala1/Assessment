@@ -1,8 +1,8 @@
 #################################### ASSESSMENT ANSWERS ###################################################
 1. Create a new Rails app
 Ans) 
-step step 2 => rails new myapp
-1 => cd path/to/your/directory
+step 1 => rails new myapp
+step 2 => cd path/to/your/directory
 step 3 => cd myapp
 
 ############################################################################################################
